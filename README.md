@@ -17,10 +17,32 @@ To develop an app perform the following steps.
 mvn archetype:generate -DarchetypeGroupId=org.opendaylight.archetypes -DarchetypeArtifactId=opendaylight-startup-archetype \
 -DarchetypeCatalog=remote -DarchetypeVersion=1.1.2-SNAPSHOT
 ```
-![result](img/result#1.png)
+![result1](./img/result#1.png)
 
 2. Build the Project
 ```
 mvn clean install -DskipTests -Dcheckstyle.skip=true
 ```
-![result](img/result#2.png)
+![result2](./img/result#2.png)
+
+![result3](./img/result#3.png)
+
+## Bugs
+
+Please report bugs to mincloud1501@naver.com
+
+## Contributing
+
+The github repository is at https://github.com/mincloud1501/OpenDayLight_Neon.git
+
+## See Also
+
+Some other stuff.
+
+## Author
+
+J.Ho Moon, <mincloud1501@naver.com>
+
+## Copyright and License
+
+(c) Copyright 1997~2019 by SKB Co. LTD

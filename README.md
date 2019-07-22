@@ -17,20 +17,20 @@ To develop an app perform the following steps.
 mvn archetype:generate -DarchetypeGroupId=org.opendaylight.archetypes -DarchetypeArtifactId=opendaylight-startup-archetype \
 -DarchetypeCatalog=remote -DarchetypeVersion=1.1.2-SNAPSHOT
 ```
-![result1](../../img/result#1.png)
+![result1](../../tree/master/img/result#1.png)
 
 2. Build the Project
 ```
 mvn clean install -DskipTests -Dcheckstyle.skip=true
 ```
-![result2](../../img/result#2.png)
+![result2](../../tree/master/img/result#2.png)
 
 3. Run Karaf
 ```
 $ cd /karaf/target/assembly/bin
 $ ./karaf
 ```
-![result3](../../img/result#3.png)
+![result3](../../tree/master/img/result#3.png)
 
 ## Bugs
 

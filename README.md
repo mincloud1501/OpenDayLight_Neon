@@ -1,4 +1,4 @@
-# neon_Example
+# OpenDayLight_Neon_Example
 ODL Neon Example Project
 
 ## Pre requisites

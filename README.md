@@ -17,3 +17,10 @@ To develop an app perform the following steps.
 mvn archetype:generate -DarchetypeGroupId=org.opendaylight.archetypes -DarchetypeArtifactId=opendaylight-startup-archetype \
 -DarchetypeCatalog=remote -DarchetypeVersion=1.1.2-SNAPSHOT
 ```
+![result](img/result#1.png)
+
+2. Build the Project
+```
+mvn clean install -DskipTests -Dcheckstyle.skip=true
+```
+![result](img/result#2.png)

@@ -4,7 +4,7 @@ ODL Neon SR1 Example Project
 ## Pre requisites
 * Apache Maven 3.6.1
 * Java version: 1.8.0_212
-* OpenDayLight Neon SR1 Installing
+* OpenDayLight Neon SR2 Development (1.1.2-SNAPSHOT) Installing
 * Default OpenDayLight [settings.xml]
 ```
 $ cp -n ~/.m2/settings.xml{,.orig} ; wget -q -O - https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml > ~/.m2/settings.xml
@@ -16,8 +16,7 @@ To develop an app perform the following steps.
 
 1. Create an Example project using Maven and an archetype called the opendaylight-startup-archetype. If you are downloading this project for the first time, then it will take sometime to pull all the code from the remote repository.
 ```
-$~/opendaylight-0.10.1$ mvn archetype:generate -DarchetypeGroupId=org.opendaylight.archetypes -DarchetypeArtifactId=opendaylight-startup-archetype 
--DarchetypeCatalog=remote -DarchetypeVersion=1.1.2-SNAPSHOT
+$ mvn archetype:generate -DarchetypeGroupId=org.opendaylight.archetypes -DarchetypeArtifactId=opendaylight-startup-archetype -DarchetypeCatalog=remote -DarchetypeVersion=1.1.2-SNAPSHOT
 ```
 ![result1](img/result1.png)
 
@@ -60,7 +59,7 @@ module example {
     namespace "urn:opendaylight:params:xml:ns:yang:example";
     prefix "example";
 
-    revision "2018-05-17" {
+    revision "2015-01-05" {
         description "Initial revision of example model";
     }
 
@@ -94,14 +93,14 @@ $ cd ../impl/src/main/java/org/opendaylight/example/impl/
 ```
 2. Create a new file called [ExampleTestImpl.java] and add in the code below.
 ```js
-package org.opendaylight.example.impl;
+package per.mincloud.example.impl;
 
 import java.util.concurrent.Future;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev180517.ExampleService;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev180517.ExampleTestInput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev180517.ExampleTestOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev180517.ExampleTestInputBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev180517.ExampleTestOutputBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev150105.ExampleService;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev150105.ExampleTestInput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev150105.ExampleTestOutput;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev150105.ExampleTestInputBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev150105.ExampleTestOutputBuilder;
 import org.opendaylight.yangtools.yang.common.RpcResult;
 import org.opendaylight.yangtools.yang.common.RpcResultBuilder;
 
@@ -117,13 +116,13 @@ public class ExampleTestImpl implements ExampleService {
 ```
 3. The ExampleProvider.java file is in the current directory. Register the RPC that you created in the [example.yang] file in the [ExampleProvider.java] file.
 ```js
-package org.opendaylight.example.impl;
+package per.mincloud.example.impl;
 
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.RpcRegistration;
 import org.opendaylight.controller.sal.binding.api.BindingAwareProvider;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev180517.ExampleService;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.example.rev150105.ExampleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -150,7 +149,7 @@ public class ExampleProvider implements BindingAwareProvider, AutoCloseable {
 4. Optionally, you can also build the Java classes which will register the new RPC. This is useful to test the edits you have made to ExampleProvider.java and ExampleTestImpl.java.
 ```
 $ cd impl
-$ mvn findbugs:gui
+$ mvn clean install -DskipTests -Dcheckstyle.skip
 ```
 ![result5](img/result5.png)
 
@@ -166,8 +165,11 @@ ___
 
 ## Test the example-test RPC via REST
 ```
-1. 
+1. Connect http://127.0.0.1:8181/apidoc/explorer/index.html (ID/PWD : karaf/karaf)
+
 ```
+![result8](img/result8.png)
+
 ## Bugs
 
 Please report bugs to mincloud@sk.com

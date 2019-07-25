@@ -1,22 +1,27 @@
 # OpenDayLight_Neon Project
 ODL Neon SR1 Example Project
 
-## Pre requisites
+## ■ Pre requisites
 * Apache Maven 3.6.1
 * Java version: 1.8.0_212
-* OpenDayLight Neon SR2 Development (1.1.2-SNAPSHOT) Installing
 * Default OpenDayLight [settings.xml]
 ```
 $ cp -n ~/.m2/settings.xml{,.orig} ; wget -q -O - https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml > ~/.m2/settings.xml
 ```
 ___
 
-## Building an Example Module
+## ■ Building an Example Module
 To develop an app perform the following steps.
 
 1. Create an Example project using Maven and an archetype called the opendaylight-startup-archetype. If you are downloading this project for the first time, then it will take sometime to pull all the code from the remote repository.
+
+[Neon SR1 Development Version]
 ```
 $ mvn archetype:generate -DarchetypeGroupId=org.opendaylight.archetypes -DarchetypeArtifactId=opendaylight-startup-archetype -DarchetypeCatalog=remote -DarchetypeVersion=1.1.2-SNAPSHOT
+```
+[Carbon Version : Stable]
+```
+$ mvn org.apache.maven.plugins:maven-archetype-plugin:2.4:generate -DarchetypeGroupId=org.opendaylight.controller -DarchetypeArtifactId=opendaylight-startup-archetype -DarchetypeRepository=http://nexus.opendaylight.org/content/repositories/public/ -DarchetypeCatalog=http://nexus.opendaylight.org/content/repositories/public/archetype-catalog.xml -DarchetypeVersion=1.3.3-Carbon
 ```
 ![result1](img/result1.png)
 
@@ -34,7 +39,7 @@ $ ./karaf
 ![result3](img/result3.png)
 ___
 
-## Defining a RPC
+## ■ Defining a RPC
 1. Now view the entry point to understand where the log line came from. The entry point is in the impl project:
 ```
 $ impl/src/main/java/org/opendaylight/example/impl/ExampleProvider.java
@@ -48,7 +53,7 @@ public void onSessionInitiated(ProviderContext session) {
 ```
 ___
 
-## Add a RPC API
+## ■ Add a RPC API
 ```
 $ cd api/src/main/yang/example.yang
 ```
@@ -86,7 +91,7 @@ $ mvn clean install -DskipTests -Dcheckstyle.skip
 ![result4](img/result4.png)
 ___
 
-## Implement a RPC API
+## ■ Implement a RPC API
 1. Define the ExampleService, which is invoked through the Example API.
 ```
 $ cd ../impl/src/main/java/org/opendaylight/example/impl/
@@ -134,7 +139,7 @@ public class ExampleProvider implements BindingAwareProvider, AutoCloseable {
     @Override
     public void onSessionInitiated(ProviderContext session) {
         LOG.info("ExampleProvider Session Initiated");
-        exampleService = session.addRpcImplementation(ExampleService.class, new ExampleTestImpl());
+        this.exampleService = session.addRpcImplementation(ExampleService.class, new ExampleTestImpl());
     }
 
     @Override
@@ -151,8 +156,6 @@ public class ExampleProvider implements BindingAwareProvider, AutoCloseable {
 $ cd impl
 $ mvn clean install -DskipTests -Dcheckstyle.skip
 ```
-![result5](img/result5.png)
-
 5. Build the entire example again, which will pickup the changes you have made and build them into your project:
 ```
 $ mvn clean install -DskipTests -Dcheckstyle.skip
@@ -162,14 +165,20 @@ $ mvn clean install -DskipTests -Dcheckstyle.skip
 
 ![result6](img/result6.png)
 ___
-
-## Test the example-test RPC via REST
+## ■ Execute the Example Project
 ```
-1. Connect http://127.0.0.1:8181/apidoc/explorer/index.html (ID/PWD : karaf/karaf)
+$ cd /karaf/target/assembly/bin
+$ ./karaf
+$ opendaylight-user@root> log:display | grep example
+```
+___
+## ■ Test the example-test RPC via REST
+```
+1. Connect http://127.0.0.1:8181/apidoc/explorer/index.html (ID/PWD : admin/admin)
 
 ```
 ![result8](img/result8.png)
-
+___
 ## Bugs
 
 Please report bugs to mincloud@sk.com

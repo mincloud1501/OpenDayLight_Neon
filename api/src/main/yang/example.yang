@@ -1,9 +1,22 @@
 module example {
-    yang-version 1.1;
+    yang-version 1;
     namespace "urn:opendaylight:params:xml:ns:yang:example";
     prefix "example";
 
-    revision "2018-05-17" { // TODO change revision to date of model creation
+    revision "2015-01-05" {
         description "Initial revision of example model";
+    }
+
+    rpc example-test {
+        input {
+            leaf name {
+                type string;
+            }
+        }
+        output {
+            leaf greeting {
+                type string;
+            }
+        }
     }
 }
